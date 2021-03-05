@@ -1,0 +1,42 @@
+﻿@model CheckOutViewModel
+@{
+    ViewData["Title"] = "Check Out";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="my-4">
+                <h5>@ViewBag.Book.BookTitle</h5>
+            </div>
+            <div class="my-3">
+                <form asp-controller="Book" asp-action="CheckOut" method="post">
+                    <div class="form-group">
+                        <label asp-for="BorrowerName">Borrower Name</label>
+                        <input class="form-control" asp-for="BorrowerName" />
+                        <span class="text-danger" asp-validation-for="BorrowerName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber">Mobile Number</label>
+                        <input class="form-control" asp-for="PhoneNumber" />
+                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NationalId">National ID</label>
+                        <input class="form-control" asp-for="NationalId" />
+                        <span class="text-danger" asp-validation-for="NationalId"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block btn-dark">Check Out</button>
+                    </div>
+                </form>
+            </div>
+            <div class="my-2">
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Message</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

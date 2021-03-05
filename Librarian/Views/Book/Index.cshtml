@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger my-5">@ViewBag.ErrorMessage</div>
+            }
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success my-5">@ViewBag.Message</div>
+            }
+            <table class="table table-striped my-4">
+                <thead class="thead-light">
+                    <tr>
+                        <th></th>
+                        <th>Book Title</th>
+                        <th>ISBN</th>
+                        <th>Publish Year</th>
+                        <th>Cover Price</th>
+                        <th>Check in / Check out Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.Books)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checker" class="custom-checkbox" data-entityId="@item.Id" data-status="@item.Status"/>
+                            </td>
+                            <td>@item.BookTitle</td>
+                            <td>@item.ISBN</td>
+                            <td>@item.PublishedYear</td>
+                            <td>@item.CoverPrice</td>
+                            <td>
+                                @if (item.Status == 0)
+                                {
+                                    <div>Checked In</div>
+                                }
+                                else { 
+                                    <div>Checked Out</div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="mt-5">
+                <button class="btn btn-primary checkIn">Check In</button>
+                <button class="btn btn-dark checkOut">Check Out</button>
+                <button class="btn btn-info details">Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Book details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

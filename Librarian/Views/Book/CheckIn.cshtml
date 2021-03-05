@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Check In";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h5 class="my-5">@ViewBag.Book.BookTitle</h5>
+
+            @if (ViewBag.BookDetail != null)
+            {
+        <div class="my-4">
+            <div class="d-flex justify-content-between bg-light px-2 py-3">
+                <div class="">Borrower's Name</div>
+                <div class="">@ViewBag.BookDetail.BorrowerName</div>
+            </div>
+            <div class="d-flex justify-content-between px-2 py-3">
+                <div class="">Phone Number</div>
+                <div class="">@ViewBag.BookDetail.PhoneNumber</div>
+            </div>
+            <div class="d-flex justify-content-between bg-light px-2 py-3">
+                <div class="">National ID</div>
+                <div class="">@ViewBag.BookDetail.NationalId</div>
+            </div>
+            <div class="d-flex justify-content-between px-2 py-3">
+                <div class="">Required Return Date</div>
+                <div class="">@($"{ViewBag.BookDetail.ReturnDate:dd/MM/yyyy}")</div>
+            </div>
+            <div class="d-flex justify-content-between bg-light px-2 py-3">
+                <div class="">Actual Return Date</div>
+                <div class="">
+                    @($"{ViewBag.BookDetail.ActualReturnDate:dd/MM/yyyy}")
+                </div>
+            </div>
+            <div class="my-2">
+                @if (ViewBag.Fined)
+                {
+                    <div class="alert alert-danger">You have exceeded the return date hence you will be fined <strong>#500</strong></div>
+                }
+            </div>
+            @if (ViewBag.BookDetail.ActualReturnDate == null)
+            {
+                <div class="my-3 text-center">
+                    <button class="btn btn-block btn-primary saveCheckIn" data-bookid="@ViewBag.BookDetail.BookId" 
+                            data-id="@ViewBag.BookDetail.Id" data-fined="@ViewBag.Fined">Check In</button>
+                </div>
+            }
+        </div>
+            }
+        </div>
+    </div>
+</div>
